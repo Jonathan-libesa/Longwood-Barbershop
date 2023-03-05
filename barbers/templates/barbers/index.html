@@ -60,7 +60,9 @@
                  <li class="nav-item" id="team"><a href="#ourTeam" class="nav-link">Team</a></li>
                  <li class="nav-item" id="our-services"><a href="#ourServices" class="nav-link">Our Services</a></li>
                  <li class="nav-item" id="home-page"><a class="nav-link">Home</a></li>
-
+                 {% if request.user.is_authenticated %}
+                 <li class="nav-item" id="home-page"><a href= "{% url 'logout' %}"class="nav-link">logout</a></li>
+                 {% endif %}
              </ul>
          </div>
      </nav>
