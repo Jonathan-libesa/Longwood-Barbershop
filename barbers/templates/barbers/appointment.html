@@ -7,11 +7,12 @@
 
 <!-- JavaScript -->
 {% block js %} <script src="{% static 'js/appointment.js' %}"></script> {% endblock %}
-{% block body %}
+{% block content %}
 <!-- Body -->
 
 <!-- Form -->
 <div class="container">
+  {% include 'users/messages.html'%}
   <div class="row">
     <div class="col-md-10 offset-md-1">
       <span class="anchor" id="formComplex"></span>

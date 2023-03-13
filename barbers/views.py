@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 #Login Requirements
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 # Create your views here.
 def index(request):
@@ -13,29 +14,26 @@ def index(request):
 
 
 def login_view(request):
-  # POST
-  if request.method == 'POST':
+    if request.method == 'POST':
+        context = {}
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
-    # Grab username & password submitted via POST request & make sure that both
-    # fields are not empty
-    username = request.POST["username"]
-    password = request.POST["password"]
-    if username == '' or password == '':
-      return HttpResponse('{"success": false, "message": "Both username and password are required."}')
+        user = authenticate(request, username=username, password=password)
 
-    # Django built-in username & password authentication + login session -- by
-    # logging the user in, request.user.is_authenticated == True in the
-    # def index(request): route.
-    user = authenticate(request, username=username, password=password)
-    if user is not None:
-      login(request, user)
-      return HttpResponse('{"success": true, "message": ""}')
-    else:
-      return HttpResponse('{"success": false, "message": "Invalid username and/or password."}')
+        if not user:
+            messages.add_message(request, messages.WARNING,
+                                 'Invalid credentials, try again')
+            return render(request, 'users/login.html', context,)
 
-  # GET
-  else:
-    return render(request, "barbers/appointment.html")
+        login(request, user)
+
+        messages.add_message(request, messages.SUCCESS,
+                             f'Welcome  {user.username} ')
+
+        return redirect(reverse('appointment'))
+
+    return render(request, 'users/login.html')
 # ============================ REGISTER ==========================================
 
 def register_view(request):

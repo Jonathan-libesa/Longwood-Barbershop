@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'barbers',
+    'Users',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -122,3 +123,12 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# EMAIL CONFIG
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_FROM_USER = 'EMAIL_FROM_USER'
+EMAIL_HOST = 'smtp.gmail.com'
+#EMAIL_HOST_USER ='put your email'
+#EMAIL_HOST_PASSWORD = 'put your email password'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
