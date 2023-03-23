@@ -10,7 +10,7 @@
 <!-- Body -->
 {% block content %}
 <!-- Navbar -->
-
+ {% include 'users/messages.html'%}
 
 
  <!-- Navbar -->
@@ -24,13 +24,13 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                  <li type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-                 <a class="nav-link" href="#">Sign In To Make Appointment</a>
                  </li>
                  <li class="nav-link text-light" id="welcome"></li>
                  <li class="nav-item" id="team"><a href="#ourTeam" class="nav-link">Team</a></li>
                  <li class="nav-item" id="our-services"><a href="#ourServices" class="nav-link">Our Services</a></li>
                  <li class="nav-item" id="home-page"><a class="nav-link">Home</a></li>
                  {% if request.user.is_authenticated %}
+                 <li class="nav-item" id="home-page"><a  href="{% url 'userPanel' %}"class="nav-link">Dashboard</a></li>
                  <li class="nav-item" id="home-page"><a href= "{% url 'logout' %}"class="nav-link">logout</a></li>
                  {% endif %}
              </ul>
@@ -39,7 +39,7 @@
      <div id="home">
        <div class="landing-text">
          <div id="landing-text">Welcome to Longwood Barbershop!</div>
-         <a  href="{% url 'appointment' %}" class="btn btn-info btn-lg" role="button">Make an Appointment Today!</a>
+         <a  href="{% url 'booking' %}" class="btn btn-info btn-lg" role="button">Make an Appointment Today!</a>
        </div>
      </div>
 

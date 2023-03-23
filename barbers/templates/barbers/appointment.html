@@ -66,23 +66,19 @@
             </select>
           </div>
           <div class="col-sm-3 pb-3">
-            <label for="myDate">Date</label>
-            <input required="true" type="text" class="form-control" name="myDate" id="myDate" placeholder="YYYY-MM-DD">
+            <label for="myDate">Select Day:</label>
+            <select class="form-control" name="day" required="true">
+              {% for validateWeekday in validateWeekdays %}
+               <option value="{{validateWeekday}}">{{validateWeekday}}</option>
+              {% endfor %}
+              </select>
           </div>
           <div class="col-sm-3 pb-3">
             <label for="time">Time</label>
             <select class="form-control" id="time" name="time">
-              <option >7am-8am</option>
-              <option value="8am-9am">8am-9am</option>
-              <option value="9am-10am">9am-10am</option>
-              <option value="11am-12pm">11am-12pm</option>
-              <option value="12pm-1pm">12pm-1pm</option>
-              <option value="2pm-3pm">2pm-3pm</option>
-              <option value="3pm-4pm">3pm-4pm</option>
-              <option selected="selected" value="4pm-5pm">4pm-5pm</option>
-              <option value="5pm-6pm">5pm-6pm</option>
-              <option value="6pm-7pm">6pm-7pm</option>
-              <option value="7pm-8pm">7pm-8pm</option>
+              {% for time in times %}
+                <option value="{{time}}">{{time}}</option>
+              {% endfor %}
             </select>
           </div>
           <div class="col-md-6 pb-3">

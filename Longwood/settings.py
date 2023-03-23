@@ -9,12 +9,14 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+import os
+import sys
 from pathlib import Path
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -128,7 +130,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_FROM_USER = 'EMAIL_FROM_USER'
 EMAIL_HOST = 'smtp.gmail.com'
-#EMAIL_HOST_USER ='put your email'
-#EMAIL_HOST_PASSWORD = 'put your email password'
+#EMAIL_HOST_USER ='your email'
+#EMAIL_HOST_PASSWORD = 'your password'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587

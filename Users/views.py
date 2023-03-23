@@ -16,8 +16,9 @@ import threading
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.views import View
 from django.contrib.auth.models import User
-
-
+from django.contrib.auth.forms import UserCreationForm
+from .forms import RegisterUserForm
+from django.contrib.auth import authenticate, login,logout
 # To MAKE EASIER FOR EMAILING A USER
 class EmailThread(threading.Thread):
 
@@ -115,3 +116,28 @@ class CompletePasswordReset(View):
         except Exception as identifer:
             messages.info(request,'Something went wrong ,try again')
             return render(request,'users/new-password.html',context)
+
+
+
+def logout_user(request):
+    logout(request)
+    messages.success(request, "Sign Out Successful")
+    return redirect('index')
+
+# ============================ REGISTER ==========================================
+def register_user(request):
+    if request.method == "POST":
+        form = RegisterUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+            user = authenticate(username=username, password = password)
+            login(request, user)
+            messages.success(request, "Sign Up Completed!")
+            return redirect('booking')
+    else:
+        form = RegisterUserForm()
+    return render(request, 'users/register.html', {
+        'form':form,
+    })
